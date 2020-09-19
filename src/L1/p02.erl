@@ -13,7 +13,11 @@
 -export([but_last/1]).
 
 
-but_last([Penult, Last]) ->
-  [Penult, Last];
-but_last([_|Last]) ->
-  but_last(Last).
+but_last([_]) ->
+  undefined;
+but_last([]) ->
+  undefined;
+but_last([H,T]) ->
+  [H,T];
+but_last([_|T]) ->
+  but_last(T).

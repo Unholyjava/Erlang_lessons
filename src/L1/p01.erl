@@ -12,7 +12,10 @@
 %% API
 -export([last/1]).
 
-last([Element]) ->
-  Element;
-last([_|Element]) ->
-  last(Element).
+
+last([]) ->
+  [];
+last([T]) ->
+  [T];
+last([_|T]) ->
+  last(T).

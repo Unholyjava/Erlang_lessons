@@ -17,5 +17,5 @@ element_at([H|_], 1) ->
   H;
 element_at([], 1) ->
   undefined;
-element_at([_|H], N) when N > 1 ->
-  element_at(H, N - 1).
+element_at([_|T], N) when N > 1 ->
+  element_at(T, N - 1).
