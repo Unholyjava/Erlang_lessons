@@ -11,7 +11,7 @@
 
 %% API
 %% Создание таблички с кешем                            ok = my_cache:create().
-%% Ключ, Значение, Время жизни записи                   ok = my_cache:insert(Key, Value, 600)
+%% Ключ, Значение, Время жизни записи                   ok = my_cache:insert(Key, Value, 600).
 %% Получить значение по ключу,                          {ok, Value} = my_cache:lookup(Key)
 %% должна доставать только НЕ устаревшие данные
 %% Очистка утстаревших данных                           ok = my_cache:delete_obsolete()
