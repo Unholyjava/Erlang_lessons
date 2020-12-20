@@ -29,19 +29,19 @@ insert(Key, Value, T_life) ->
 lookup(Key_Table) ->
   Time_Now = time_now(),
   ets:select(table_cache, ets:fun2ms(fun({Key, Value, T_Life, {MegaSec,Sec,_}})
-    when Key =:= Key_Table andalso Time_Now - (MegaSec * 1000000 * 0 + Sec) =< T_Life -> {ok, Value} end)).
+    when Key =:= Key_Table andalso Time_Now - (MegaSec * 1000000 + Sec) =< T_Life -> {ok, Value} end)).
 
 delete_obsolete() ->
   Time_Now = time_now(),
   ets:select_delete(table_cache, ets:fun2ms(fun({_, _, T_Life, {MegaSec,Sec,_}})
-    when Time_Now - (MegaSec * 1000000 * 0 + Sec) > T_Life -> true end)).
+    when Time_Now - (MegaSec * 1000000 + Sec) > T_Life -> true end)).
 
 delete_obsolete_per_time(TimeSecPeriodic) ->
   timer:apply_interval(TimeSecPeriodic*1000, my_cache, delete_obsolete, []).
 
 time_now() ->
   {MegaSecNow,SecNow,_MicroSecNow} = erlang:timestamp(),
-  MegaSecNow * 1000000 * 0 + SecNow.
+  MegaSecNow * 1000000 + SecNow.
 
 pause(TimeOutSec) ->
   timer:sleep(TimeOutSec*1000).
